@@ -5,6 +5,8 @@ require('dotenv').config();
 const OWM_API_KEY = process.env.OWM_API_KEY || 'invalid_key';
 const UNITS = process.env.UNITS || 'metric';
 
+console.log(OWM_API_KEY);
+
 /* GET home page. */
 router.get('/', function(req, res) {
   res.render('index', { weather: null, err: null });
@@ -18,6 +20,7 @@ router.post('/get_weather', async function (req,res) {
     let data = await fetch(url);
     let weather = await data.json();
     console.log(weather);
+    console.log(OWM_API_KEY);
     if(weather.cod == '404' && weather.main == undefined) {
       res.render('index', {weather: null, error: 'Error: Unknown city'});
     }
